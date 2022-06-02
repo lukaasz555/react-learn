@@ -3,12 +3,13 @@ export const users = [
         name: "John Doe",
         result: "76%",
 /*         average: '' */
+        average: "3.76"
     },
 
     {
         name: "Jane Doe",
         result: "85%",
-        average: "4.1"
+        average: "4.11"
     },
 
     {
@@ -19,8 +20,8 @@ export const users = [
     
     {
         name: "Perry Smith",
-        result: "54%",
-        average: "1.94"
+        result: "59%",
+        average: "2.03"
     }
 ]
 
