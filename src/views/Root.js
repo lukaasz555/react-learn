@@ -10,7 +10,7 @@ const Root = () => (
   <ThemeProvider theme={theme}>
   <GlobalStyle />
   <Wrapper>
-    <UsersList />
+    <UsersList title="example props title"/>
   </Wrapper>
 
   </ThemeProvider>
