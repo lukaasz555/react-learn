@@ -6,7 +6,9 @@ import Button from 'components/atoms/Button/Button';
 import { Average } from 'components/atoms/Average/Average';
 import { Wrapper, ParagraphsWrapper } from './UsersListItem.styles';
 
-const UsersListItem = ({ userData: {average = "TBA", name, result}}) => (
+const handleClick = (index) => alert(`got it at ${index + 1}`);
+
+const UsersListItem = ({ index, userData: {average = "TBA", name, result}}) => (
 <Wrapper>        
     <Average average={average}>
     </Average>
@@ -14,7 +16,7 @@ const UsersListItem = ({ userData: {average = "TBA", name, result}}) => (
         <p>{name}</p>
         <p>{result}</p>
     </ ParagraphsWrapper>
-    <Button>
+    <Button onClick={() => handleClick(index)}>
     <DeleteIcon />
     </Button>
 </Wrapper>
