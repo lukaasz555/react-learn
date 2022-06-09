@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ReactComponent as DeleteIcon } from 'assets/icons/delete-icon.svg';
-import Button from 'components/atoms/Button/Button';
+import RemoveButton from 'components/atoms/RemoveButton/RemoveButton';
 import { Average } from 'components/atoms/Average/Average';
 import { Wrapper, ParagraphsWrapper } from './UsersListItem.styles';
 
@@ -14,9 +14,9 @@ const UsersListItem = ({ handleDelete, index, userData: {average = "TBA", name, 
         <p>{name}</p>
         <p>{result}</p>
     </ ParagraphsWrapper>
-    <Button onClick={() => handleDelete(name)}>
+    <RemoveButton onClick={() => handleDelete(name)}>
     <DeleteIcon />
-    </Button>
+    </RemoveButton>
 </Wrapper>
 )
 
