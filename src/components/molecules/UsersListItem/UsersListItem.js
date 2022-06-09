@@ -1,14 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-/* import styled from 'styled-components'; */
 import { ReactComponent as DeleteIcon } from 'assets/icons/delete-icon.svg';
 import Button from 'components/atoms/Button/Button';
 import { Average } from 'components/atoms/Average/Average';
 import { Wrapper, ParagraphsWrapper } from './UsersListItem.styles';
 
-const handleClick = (index) => alert(`got it at ${index + 1}`);
 
-const UsersListItem = ({ index, userData: {average = "TBA", name, result}}) => (
+const UsersListItem = ({ handleDelete, index, userData: {average = "TBA", name, result}}) => (
 <Wrapper>        
     <Average average={average}>
     </Average>
@@ -16,7 +14,7 @@ const UsersListItem = ({ index, userData: {average = "TBA", name, result}}) => (
         <p>{name}</p>
         <p>{result}</p>
     </ ParagraphsWrapper>
-    <Button onClick={() => handleClick(index)}>
+    <Button onClick={() => handleDelete(name)}>
     <DeleteIcon />
     </Button>
 </Wrapper>
