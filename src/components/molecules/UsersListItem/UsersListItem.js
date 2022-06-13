@@ -24,7 +24,7 @@ UsersListItem.propTypes= {
     userData: PropTypes.shape({
         average: PropTypes.string,
         name: PropTypes.string.isRequired,
-        result: PropTypes.string.isRequired
+        result: PropTypes.string.isRequired,
     })
 }
 
