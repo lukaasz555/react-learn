@@ -1,12 +1,13 @@
-import React, {useState, useEffect} from 'react';
-import UsersList from 'components/organisms/UsersList/UsersList';
+import React, {useState} from 'react';
 import { ThemeProvider } from 'styled-components';
 import { theme } from 'assets/styles/theme';
 import GlobalStyle from 'assets/styles/globalStyles';
 import { Wrapper } from 'views/Root.styles';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import Form from 'components/organisms/Form/Form';
 import {users as usersData } from 'data/users';
+import MainTemplate from 'components/templates/MainTemplate/MainTemplate';
+import AddUser from './AddUser';
+import Dashboard from './Dashboard';
 
 const initialFormState = {
   name: '',
@@ -14,21 +15,8 @@ const initialFormState = {
   average: ''
 }
 
-const mockAPI = (success) => {
-  return new Promise((resolve, reject) => {
-      setTimeout(() => {
-          if(usersData) {
-              resolve( [...usersData] );
-          } else {
-              reject({message: "ERROR_API"});
-          }
-      }, 2000);
-  });
-}
-
 const Root = () => {
-  const [users, setUsers] = useState([]);
-  const [isLoading, setLoadingState] = useState([]);
+  const [users, setUsers] = useState(usersData);
   const [formValues, setFormValue] = useState(initialFormState);
 
   const handleInputChange = e => {
@@ -43,26 +31,11 @@ const handleDelete = (name) => {
     setUsers(filteredUsers);
 }
 
-useEffect(() => {
-setLoadingState(true);
-mockAPI()
-    .then(res => {
-        setLoadingState(false)
-        setUsers(res)
-    })
-    .catch(err => console.log(err));
-}, []);
-
-/* 
-useEffect(() => {
-console.log('loading state has changed');
-}, [isLoading]) */
-
 const handleAddUser = (e) => {
 e.preventDefault();
 const newUser = {
     name: formValues.name,
-    result: Number(formValues.result),
+    result: formValues.result,
     average: formValues.average
 }
 
@@ -72,30 +45,26 @@ if(newUser.name.length >= 3) {
 setFormValue(initialFormState)
 infoMsg.style.color = 'green';
 infoMsg.textContent = 'success';
-console.log(typeof(newUser.result));
 } else {
 infoMsg.style.color = 'red';
 infoMsg.textContent = 'name should contain at least 3 chars';
 }
 
-/* setUsers([...users, newUser])
-setFormValue(initialFormState)
-const infoMsg = document.querySelector('p');
-infoMsg.style.color = 'green';
-infoMsg.textContent = 'success'; */
 }
 
   return (
     <Router>
-    <ThemeProvider theme={theme}>
-    <GlobalStyle />
-    <Wrapper>
-      <Routes>
-        <Route path='/add-user' element={<Form formValues={formValues} handleAddUser={handleAddUser} handleInputChange={handleInputChange}/>}/>
-        <Route exact path='/' element={<UsersList users={users} handleDelete={handleDelete} />}/>
-      </Routes>
-    </Wrapper>  
-    </ThemeProvider>
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        <MainTemplate>
+          <Wrapper>
+            <Routes>
+              <Route path='/add-user' element={<AddUser formValues={formValues} handleAddUser={handleAddUser} handleInputChange={handleInputChange}/>}/>
+              <Route exact path='/' element={<Dashboard users={users} handleDelete={handleDelete} />}/>
+            </Routes>
+          </Wrapper>  
+        </MainTemplate>
+      </ThemeProvider>
     </Router>
   )
 }
