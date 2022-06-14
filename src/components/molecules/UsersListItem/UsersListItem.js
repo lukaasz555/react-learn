@@ -12,7 +12,7 @@ const UsersListItem = ({ handleDelete, index, userData: {average = "TBA", name, 
     </Average>
     < ParagraphsWrapper>
         <p>{name}</p>
-        <p>{result}</p>
+        <p>{result}%</p>
     </ ParagraphsWrapper>
     <RemoveButton onClick={() => handleDelete(name)}>
     <DeleteIcon />
@@ -24,7 +24,7 @@ UsersListItem.propTypes= {
     userData: PropTypes.shape({
         average: PropTypes.string,
         name: PropTypes.string.isRequired,
-        result: PropTypes.string.isRequired,
+        result: PropTypes.number.isRequired,
     })
 }
 

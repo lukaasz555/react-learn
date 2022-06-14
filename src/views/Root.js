@@ -62,12 +62,27 @@ const handleAddUser = (e) => {
 e.preventDefault();
 const newUser = {
     name: formValues.name,
-    result: formValues.result,
+    result: Number(formValues.result),
     average: formValues.average
 }
 
-setUsers([...users, newUser])
+const infoMsg = document.querySelector('p');
+if(newUser.name.length >= 3) {
+  setUsers([...users, newUser])
 setFormValue(initialFormState)
+infoMsg.style.color = 'green';
+infoMsg.textContent = 'success';
+console.log(typeof(newUser.result));
+} else {
+infoMsg.style.color = 'red';
+infoMsg.textContent = 'name should contain at least 3 chars';
+}
+
+/* setUsers([...users, newUser])
+setFormValue(initialFormState)
+const infoMsg = document.querySelector('p');
+infoMsg.style.color = 'green';
+infoMsg.textContent = 'success'; */
 }
 
   return (
