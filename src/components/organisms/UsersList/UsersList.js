@@ -1,27 +1,28 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import UsersListItem from 'components/molecules/UsersListItem/UsersListItem';
-import {Wrapper, StyledList, StyledTitle} from 'components/organisms/UsersList/UsersList.styles';
-import Button from 'components/atoms/Button/Button';
-import {Link} from 'react-router-dom';
+import {StyledList} from 'components/organisms/UsersList/UsersList.styles';
+import { UserShape } from 'types';
+import { Title } from 'components/atoms/Title/Title';
+
 
 const UsersList = ({users, handleDelete}) => {
     return(
-<>
-    <Wrapper>
-        <StyledTitle>new students list</StyledTitle>
+    <>
+        <Title>students list:</Title>
         <StyledList>
              {users?.map((userData) => (
                  <UsersListItem userData={userData} key={userData.name} handleDelete={handleDelete} />
                 )
              )}
         </StyledList>
-        <Link to='/add-user'>
-        <Button>Add new student</Button>
-        </Link>
-        
-    </Wrapper>
-</>
+    </>
     );
 }
 
-export default UsersList
+UsersList.propTypes = {
+    users: PropTypes.arrayOf(PropTypes.shape(UserShape)),
+    deleteUser: PropTypes.func,
+}
+
+export default UsersList;

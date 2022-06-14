@@ -6,16 +6,15 @@ import { Average } from 'components/atoms/Average/Average';
 import { Wrapper, ParagraphsWrapper } from './UsersListItem.styles';
 
 
-const UsersListItem = ({ handleDelete, index, userData: {average = "TBA", name, result}}) => (
+const UsersListItem = ({ handleDelete, userData: {average = "TBA", name, result}}) => (
 <Wrapper>        
-    <Average average={average}>
-    </Average>
-    < ParagraphsWrapper>
+    <Average average={average} />
+    <ParagraphsWrapper>
         <p>{name}</p>
         <p>{result}%</p>
-    </ ParagraphsWrapper>
+    </ParagraphsWrapper>
     <RemoveButton onClick={() => handleDelete(name)}>
-    <DeleteIcon />
+        <DeleteIcon />
     </RemoveButton>
 </Wrapper>
 )
@@ -24,7 +23,7 @@ UsersListItem.propTypes= {
     userData: PropTypes.shape({
         average: PropTypes.string,
         name: PropTypes.string.isRequired,
-        result: PropTypes.number.isRequired,
+        result: PropTypes.string.isRequired,
     })
 }
 
