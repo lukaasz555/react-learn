@@ -1,28 +1,30 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import UsersListItem from 'components/molecules/UsersListItem/UsersListItem';
-import {StyledList} from 'components/organisms/UsersList/UsersList.styles';
-import { UserShape } from 'types';
-import { Title } from 'components/atoms/Title/Title';
+import React from "react";
+import PropTypes from "prop-types";
+import UsersListItem from "components/molecules/UsersListItem/UsersListItem";
+import { StyledList } from "components/organisms/UsersList/UsersList.styles";
+import { UserShape } from "types";
+import { Title } from "components/atoms/Title/Title";
 
-
-const UsersList = ({users, handleDelete}) => {
-    return(
+const UsersList = ({ users, handleDelete }) => {
+  return (
     <>
-        <Title>students list:</Title>
-        <StyledList>
-             {users?.map((userData) => (
-                 <UsersListItem userData={userData} key={userData.name} handleDelete={handleDelete} />
-                )
-             )}
-        </StyledList>
+      <Title>students list:</Title>
+      <StyledList>
+        {users?.map((userData) => (
+          <UsersListItem
+            userData={userData}
+            key={userData.name}
+            handleDelete={handleDelete}
+          />
+        ))}
+      </StyledList>
     </>
-    );
-}
+  );
+};
 
 UsersList.propTypes = {
-    users: PropTypes.arrayOf(PropTypes.shape(UserShape)),
-    deleteUser: PropTypes.func,
-}
+  users: PropTypes.arrayOf(PropTypes.shape(UserShape)),
+  handleDelete: PropTypes.func,
+};
 
 export default UsersList;

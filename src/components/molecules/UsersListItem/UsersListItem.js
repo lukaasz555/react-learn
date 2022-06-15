@@ -1,30 +1,30 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { ReactComponent as DeleteIcon } from 'assets/icons/delete-icon.svg';
-import RemoveButton from 'components/atoms/RemoveButton/RemoveButton';
-import { Average } from 'components/atoms/Average/Average';
-import { Wrapper, ParagraphsWrapper } from './UsersListItem.styles';
+import React from "react";
+import PropTypes from "prop-types";
+import { ReactComponent as DeleteIcon } from "assets/icons/delete-icon.svg";
+import RemoveButton from "components/atoms/RemoveButton/RemoveButton";
+import { Average } from "components/atoms/Average/Average";
+import { Wrapper, ParagraphsWrapper } from "./UsersListItem.styles";
+import { UserShape } from "types";
 
-
-const UsersListItem = ({ handleDelete, userData: {average = "TBA", name, result}}) => (
-<Wrapper>        
+const UsersListItem = ({
+  handleDelete,
+  userData: { average = "TBA", name, result },
+}) => (
+  <Wrapper>
     <Average average={average} />
     <ParagraphsWrapper>
-        <p>{name}</p>
-        <p>{result}%</p>
+      <p>{name}</p>
+      <p>{result}%</p>
     </ParagraphsWrapper>
     <RemoveButton onClick={() => handleDelete(name)}>
-        <DeleteIcon />
+      <DeleteIcon />
     </RemoveButton>
-</Wrapper>
-)
+  </Wrapper>
+);
 
-UsersListItem.propTypes= {
-    userData: PropTypes.shape({
-        average: PropTypes.string,
-        name: PropTypes.string.isRequired,
-        result: PropTypes.string.isRequired,
-    })
-}
+UsersListItem.propTypes = {
+  userData: PropTypes.arrayOf(PropTypes.shape(UserShape)),
+  handleDelete: PropTypes.func,
+};
 
 export default UsersListItem;
