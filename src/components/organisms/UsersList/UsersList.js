@@ -5,17 +5,13 @@ import { StyledList } from "components/organisms/UsersList/UsersList.styles";
 import { UserShape } from "types";
 import { Title } from "components/atoms/Title/Title";
 
-const UsersList = ({ users, handleDelete }) => {
+const UsersList = ({ users }) => {
   return (
     <>
       <Title>students list:</Title>
       <StyledList>
-        {users?.map((userData) => (
-          <UsersListItem
-            userData={userData}
-            key={userData.name}
-            handleDelete={handleDelete}
-          />
+        {users.map((userData) => (
+          <UsersListItem userData={userData} key={userData.name} />
         ))}
       </StyledList>
     </>
