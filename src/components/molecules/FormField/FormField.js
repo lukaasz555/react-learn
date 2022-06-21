@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import { Label } from "../../atoms/Label/Label";
 import { Input } from "components/atoms/Input/Input";
-import { renderWithThemeProvider } from "helpers/renderWithThemeProvider";
 
 const Wrapper = styled.div`
   display: flex;
@@ -36,6 +35,7 @@ const FormField = ({
         type={type}
         value={value}
         onChange={onChange}
+        data-testid={label}
       ></Input>
     </Wrapper>
   );
