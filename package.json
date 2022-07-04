@@ -45,6 +45,7 @@
     }
   },
   "devDependencies": {
+    "axios-mock-adapter": "^1.21.1",
     "prettier": "2.7.0"
   }
 }
