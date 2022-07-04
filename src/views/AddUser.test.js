@@ -5,7 +5,26 @@ import Dashboard from "./Dashboard";
 import { renderWithProviders } from "helpers/renderWithProviders";
 
 describe("AddUser", () => {
-  it("Renders the component", () => {
+  it("adds new user to the list", () => {
+    renderWithProviders(
+      <>
+        <AddUser />
+        <Dashboard />
+      </>
+    );
+    fireEvent.change(screen.getByTestId("Name"), { target: { value: "Jan" } });
+    fireEvent.change(screen.getByTestId("Result"), {
+      target: { value: "105%" },
+    });
+    fireEvent.change(screen.getByTestId("Average"), {
+      target: { value: "5.0" },
+    });
+    fireEvent.click(screen.getByTestId("Consent"));
+    fireEvent.click(screen.getByText("Add"));
+    screen.getByText("Jan");
+  });
+
+  it("prevents adding new user if there is no consent", () => {
     renderWithProviders(
       <>
         <AddUser />
@@ -20,6 +39,8 @@ describe("AddUser", () => {
       target: { value: "5.0" },
     });
     fireEvent.click(screen.getByText("Add"));
-    screen.getByText("Adam");
+    const newUser = screen.queryByText("Jan");
+    /*     console.log("newUser", newUser); */
+    expect(newUser).toBeNull();
   });
 });
