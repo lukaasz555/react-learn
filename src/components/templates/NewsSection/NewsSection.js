@@ -1,95 +1,77 @@
 import { ViewWrapper } from "components/molecules/ViewWrapper/ViewWrapper";
-import React from "react";
-import { Wrapper, NewsSectionHeader, TitleWrapper } from "./NewsSection.styles";
+import React, { useState, useEffect } from "react";
+import {
+  Wrapper,
+  NewsSectionHeader,
+  TitleWrapper,
+  ContentWrapper,
+} from "./NewsSection.styles";
 import { Button } from "components/atoms/Button/Button";
 import { ArticleWrapper } from "./NewsSection.styles";
+import axios from "axios";
 
-const data = [
-  {
-    title: "New kid in town",
-    category: "Tech news",
-    content:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. A asperiores laboriosam iure eveniet, commodi ut dignissimos saepe voluptatum vel exercitationem est pariatur natus odio placeat voluptate! Sed, deserunt. Dolorem, iure!",
-  },
+/* const API_TOKEN = "f862ef88ec1c76b5f9165920cf30fd"; */
 
-  {
-    title: "New kid in town #2",
-    category: "Tech news",
-    content:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. A asperiores laboriosam iure eveniet, commodi ut dignissimos saepe voluptatum vel exercitationem est pariatur natus odio placeat voluptate! Sed, deserunt. Dolorem, iure!",
-    image:
-      "https://i.picsum.photos/id/16/500/400.jpg?hmac=ApYz1kc5dWBN3Ahmcj1jMXxLShwpd-8lfdXFlhcVzDQ",
-  },
+const NewsSection = () => {
+  const [articles, setArticles] = useState([]);
+  const [error, setError] = useState("");
 
-  {
-    title: "New kid in town #3",
-    category: "Tech news",
-    content:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. A asperiores laboriosam iure eveniet, commodi ut dignissimos saepe voluptatum vel exercitationem est pariatur natus odio placeat voluptate! Sed, deserunt. Dolorem, iure!",
-  },
-];
+  useEffect(() => {
+    console.log(process.env.REACT_APP_DATOCMS_TOKEN);
+    axios
+      .post(
+        "https://graphql.datocms.com/",
+        {
+          query: `
+        {
+            allArticles {
+              id
+              title
+              category
+                  content
+              image {
+                url
+              }
+            }
+          }
+        `,
+        },
+        {
+          headers: {
+            authorization: `Bearer ${process.env.REACT_APP_DATOCMS_TOKEN}`,
+          },
+        }
+      )
+      .then(({ data: { data } }) => {
+        setArticles(data.allArticles);
+      })
+      .catch(() => {
+        setError(`Sorry, we couldn't load articles for you :(`);
+      });
+  });
 
-const NewsSection = () => (
-  <Wrapper>
-    <NewsSectionHeader>News feed</NewsSectionHeader>
-    {data.map(({ title, category, content, image = null }) => (
-      <ArticleWrapper key={title}>
-        <TitleWrapper>
-          <h3>{title}</h3>
-          <p>{category}</p>
-        </TitleWrapper>
-        <p>{content}</p>
-        {image ? <img src={image} alt="article image" /> : null}
-        <Button>Read more</Button>
-      </ArticleWrapper>
-    ))}
-    {/*     <ArticleWrapper>
-      <TitleWrapper>
-        <h3>Art title</h3>
-        <p>Tech news</p>
-      </TitleWrapper>
-      <p>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Modi sit
-        necessitatibus soluta laboriosam non possimus doloremque, quidem aliquam
-        ab inventore nam dolore esse in dignissimos fuga explicabo rerum error
-        magni. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-        Quisquam, autem obcaecati repudiandae corporis veritatis nisi? Voluptas,
-        iusto voluptatem. Amet mollitia similique dolorum. Aut, error! Eaque,
-        eligendi culpa. Sed, veritatis minima?
-      </p>
-      <Button isBig>Read more</Button>
-    </ArticleWrapper>
-
-    <ArticleWrapper>
-      <TitleWrapper>
-        <h3>Art title</h3>
-        <p>Tech news</p>
-      </TitleWrapper>
-      <p>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Modi sit
-        necessitatibus soluta laboriosam non possimus doloremque, quidem aliquam
-        ab inventore nam dolore esse in dignissimos fuga explicabo rerum error
-        magni. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-        Quisquam, autem obcaecati repudiandae corporis veritatis nisi? Voluptas,
-        iusto voluptatem. Amet mollitia similique dolorum.
-      </p>
-      <Button>Read more</Button>
-    </ArticleWrapper>
-
-    <ArticleWrapper>
-      <TitleWrapper>
-        <h3>Art title</h3>
-        <p>Tech news</p>
-      </TitleWrapper>
-      <p>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Modi sit
-        necessitatibus soluta laboriosam non possimus doloremque, quidem aliquam
-        ab inventore nam dolore esse in dignissimos fuga explicabo rerum error
-        magni.
-      </p>
-      <Button>Read more</Button>
-    </ArticleWrapper> */}
-  </Wrapper>
-);
+  return (
+    <Wrapper>
+      <NewsSectionHeader>News feed</NewsSectionHeader>
+      {articles.length > 0 && !error ? (
+        articles.map(({ title, category, content, image = null }) => (
+          <ArticleWrapper key={title}>
+            <TitleWrapper>
+              <h3>{title}</h3>
+              <p>{category}</p>
+            </TitleWrapper>
+            <ContentWrapper>
+              <p>{content}</p>
+              {image ? <img src={image.url} alt="img art" /> : null}
+            </ContentWrapper>
+            <Button isBig>Read more</Button>
+          </ArticleWrapper>
+        ))
+      ) : (
+        <NewsSectionHeader>{error ? error : "Loading..."}</NewsSectionHeader>
+      )}
+    </Wrapper>
+  );
+};
 
 export default NewsSection;
