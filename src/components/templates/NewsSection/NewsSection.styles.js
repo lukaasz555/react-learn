@@ -10,12 +10,12 @@ export const Wrapper = styled.div`
   justify-content: flex-start;
   align-items: flex-start;
   padding: 50px;
+  overflow-y: scroll;
 `;
 
 export const NewsSectionHeader = styled.h3`
   margin-right: auto;
-  color: ${({ theme }) => theme.colors.darkGray};
-  background-color: #fab;
+  color: ${({ theme }) => theme.colors.darkGrey};
 `;
 
 export const TitleWrapper = styled.div`
@@ -35,10 +35,18 @@ export const ArticleWrapper = styled(ViewWrapper)`
   width: 100%;
   align-items: flex-start;
   border-radius: 12px;
-
-  color: ${({ theme }) => theme.colors.darkGray};
+  color: ${({ theme }) => theme.colors.darkGrey};
 
   p {
     line-height: 1.5;
+  }
+`;
+
+export const ContentWrapper = styled.div`
+  display: flex;
+  img {
+    margin-left: 35px;
+    max-width: 200px;
+    object-fit: cover;
   }
 `;
