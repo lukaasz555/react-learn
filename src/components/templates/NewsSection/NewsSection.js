@@ -1,4 +1,3 @@
-import { ViewWrapper } from "components/molecules/ViewWrapper/ViewWrapper";
 import React, { useState, useEffect } from "react";
 import {
   Wrapper,
@@ -9,8 +8,6 @@ import {
 import { Button } from "components/atoms/Button/Button";
 import { ArticleWrapper } from "./NewsSection.styles";
 import axios from "axios";
-
-/* const API_TOKEN = "f862ef88ec1c76b5f9165920cf30fd"; */
 
 export const URL = "https://graphql.datocms.com/";
 export const query = `

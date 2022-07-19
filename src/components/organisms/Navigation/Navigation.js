@@ -10,11 +10,7 @@ export const Navigation = () => (
         Buddy
       </h1>
     </Logo>
-    <StyledLink to="/">Dashboard</StyledLink>
+    <StyledLink to="/group">Dashboard</StyledLink>
     <StyledLink to="/add-user">Add student</StyledLink>
-    {/* 
-    <StyledLink to="#">Settings</StyledLink>
-    <StyledLink to="#">Logout</StyledLink>
-    */}
   </Wrapper>
 );
