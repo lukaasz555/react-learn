@@ -46,6 +46,10 @@
   },
   "devDependencies": {
     "axios-mock-adapter": "^1.21.1",
+    "msw": "^0.44.2",
     "prettier": "2.7.0"
+  },
+  "msw": {
+    "workerDirectory": "public"
   }
 }
