@@ -23,11 +23,15 @@ export const Logo = styled.div`
   margin-bottom: 30px;
 
   h1 {
-    font-size: 15px;
-    color: ${({ theme }) => theme.colors.white};
     text-align: right;
-    margin-right: 20px;
+    margin-right: 0.7em;
   }
+`;
+
+export const LogoTitle = styled(NavLink)`
+  text-decoration: none;
+  font-size: 15px;
+  color: ${({ theme }) => theme.colors.white};
 `;
 
 export const StyledLink = styled(NavLink)`
