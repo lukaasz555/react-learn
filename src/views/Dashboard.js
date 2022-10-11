@@ -4,6 +4,7 @@ import UsersList from 'components/organisms/UsersList/UsersList';
 //import { UsersContext } from "providers/UsersProvider";
 import { useParams, NavLink } from 'react-router-dom';
 import axios from 'axios';
+import Groups from 'components/molecules/Groups/Groups';
 
 const Dashboard = () => {
 	//const { users } = useContext(UsersContext);
@@ -27,17 +28,11 @@ const Dashboard = () => {
 
 	return (
 		<>
-			<nav>
-				{groups.length > 0 ? (
-					groups.map((group) => (
-						<NavLink key={group} to={`/group/${group}`}>
-							{group}
-						</NavLink>
-					))
-				) : (
-					<p>Brak dostępnych grup</p>
-				)}
-			</nav>
+			{groups.length > 0 ? (
+				<Groups groups={groups} id={id} />
+			) : (
+				<p>Brak dostępnych grup</p>
+			)}
 			<ViewWrapper>
 				<UsersList /* users={users} */ users={students} />
 			</ViewWrapper>
