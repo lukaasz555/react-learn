@@ -26,7 +26,7 @@ const Dashboard = () => {
 	}, [id, groups]);
 
 	return (
-		<ViewWrapper>
+		<>
 			<nav>
 				{groups.length > 0 ? (
 					groups.map((group) => (
@@ -38,8 +38,10 @@ const Dashboard = () => {
 					<p>Brak dostępnych grup</p>
 				)}
 			</nav>
-			<UsersList users={students} />
-		</ViewWrapper>
+			<ViewWrapper>
+				<UsersList users={students} />
+			</ViewWrapper>
+		</>
 	);
 };
 
