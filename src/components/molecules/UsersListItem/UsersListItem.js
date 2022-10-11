@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { ReactComponent as DeleteIcon } from 'assets/icons/delete-icon.svg';
@@ -6,6 +7,16 @@ import { Average } from 'components/atoms/Average/Average';
 import { Wrapper, ParagraphsWrapper } from './UsersListItem.styles';
 /* import { UserShape } from 'types'; */
 import { UsersContext } from 'providers/UsersProvider';
+=======
+import React, { useContext } from "react";
+import PropTypes from "prop-types";
+import { ReactComponent as DeleteIcon } from "assets/icons/delete-icon.svg";
+import RemoveButton from "components/atoms/RemoveButton/RemoveButton";
+import { Average } from "components/atoms/Average/Average";
+import { Wrapper, ParagraphsWrapper } from "./UsersListItem.styles";
+//import { UserShape } from "types";
+import { UsersContext } from "providers/UsersProvider";
+>>>>>>> Stashed changes
 
 const UsersListItem = ({ userData: { average = 'TBA', name, result } }) => {
 	const { handleDelete } = useContext(UsersContext);
@@ -24,8 +35,14 @@ const UsersListItem = ({ userData: { average = 'TBA', name, result } }) => {
 	);
 };
 
+<<<<<<< Updated upstream
 /* UsersListItem.propTypes = {
   userData: PropTypes.arrayOf(PropTypes.shape(UserShape)),
 }; */
+=======
+UsersListItem.propTypes = {
+  userData: PropTypes.object,
+};
+>>>>>>> Stashed changes
 
 export default UsersListItem;

@@ -1,13 +1,15 @@
 import { React } from "react";
-import { Wrapper, Logo, StyledLink } from "./Navigation.styles";
+import { Wrapper, Logo, StyledLink, LogoTitle } from "./Navigation.styles";
 
 export const Navigation = () => (
   <Wrapper>
     <Logo>
       <h1>
-        Study
-        <br />
-        Buddy
+        <LogoTitle to="/">
+          Study
+          <br />
+          Buddy
+        </LogoTitle>
       </h1>
     </Logo>
     <StyledLink to="/group">Dashboard</StyledLink>
